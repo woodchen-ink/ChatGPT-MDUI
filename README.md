@@ -8,7 +8,7 @@
 ## 例子
 
 ![image](https://user-images.githubusercontent.com/95951386/224310898-c59ee54f-359e-4bce-a154-b6b19f2bae70.png)
-
+![image](https://user-images.githubusercontent.com/95951386/224313738-89993088-194e-4c21-9117-0808750b7076.png)
 
 ## 使用方法
 
