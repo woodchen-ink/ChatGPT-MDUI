@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <title>CZL Chatgpt</title>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/jquery@3.6.2/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
+    <style>
+        body {
+  font-family: system-ui, -apple-system, "Microsoft YaHei", Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif !important
+}
+
+body {
+  background-color: #ffffff;
+  margin: 0;
+}
+
+.question {
+  color: #1e3b7a;
+  font-size: 1em;
+}
+
+.answer {
+  color: #000000;
+  font-size: 1em;
+  background-color: #F5F5F5;
+}
+
+.errormessage {
+  color: #B32142;
+}
+
+#chatbox {
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+    </style>
+</head>
+
+<body
+    class="mdui-appbar-with-toolbar mdui-bottom-nav-fixed mdui-theme-primary-indigo mdui-theme-accent-indigo mdui-color-grey-50" style="padding-bottom:280px;">
+    <div class="mdui-appbar mdui-appbar-fixed mdui-valign" style="background-color: #1e3b7a;">
+        <h1 class="mdui-center" style="color:#FFF;">CZL Chatgpt</h1>
+    </div>
+    <div class="mdui-container">
+        <div id="chatbox" class=" mdui-p-a-1 mdui-m-t-3 mdui-row"></div>
+    </div>
+    
+    <div class="mdui-bottom-nav  mdui-container-fluid " style="height:auto;flex-direction: column;background-color: rgb(204, 204, 204);">
+        <div class="mdui-container ">
+        <textarea id="userInput" class="mdui-textfield-input mdui-m-y-3 mdui-p-a-2 mdui-shadow-1 mdui-row mdui-color-grey-50" type="text"
+            rows="6" placeholder="在这里输入问题...换行请按Ctrl+Enter" autofocus></textarea>
+        <input id="sendButton" type="button" value="询问"
+            class="mdui-btn mdui-btn-raised mdui-btn-block mdui-color-indigo mdui-row mdui-m-b-2" style="height:50px;">
+    </div>
+</div>
+
+    <script>
+        const url = new URL(window.location.href);
+        const chatbox = $("#chatbox");
+        const userInput = $("#userInput");
+        const sendButton = $("#sendButton");
+
+        $(document).ready(function () {
+            const messages = [];
+
+            sendButton.on("click", () => {
+                const message = userInput.val();
+                if (message) {
+                    messages.push({
+                        "role": "user",
+                        "content": message
+                    });
+                    chatbox.append(`<div class="question mdui-p-a-2 mdui-typo">Q: ${message}</div>`);
+                    userInput.val("");
+                    sendButton.val("询问中...");
+                    sendButton.prop("disabled", true);
+                    fetchMessages();
+                }
+            });
+
+            userInput.on("keydown", (event) => {
+                if (event.keyCode === 13 && !event.ctrlKey && !event.shiftKey) { // Enter key without Ctrl key
+                    event.preventDefault();
+                    sendButton.click();
+                } else if (event.keyCode === 13 && (event.ctrlKey || event.shiftKey)) { // Enter key with Ctrl key
+                    event.preventDefault();
+                    const cursorPosition = userInput.prop("selectionStart");
+                    const currentValue = userInput.val();
+                    userInput.val(
+                        currentValue.slice(0, cursorPosition) +
+                        "\n" +
+                        currentValue.slice(cursorPosition)
+                    );
+                    userInput.prop("selectionStart", cursorPosition + 1);
+                    userInput.prop("selectionEnd", cursorPosition + 1);
+                }
+            });
+
+            function fetchMessages() {
+                try {
+                    var settings = {
+                        "url": "https://api.openai.com/v1/chat/completions",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Authorization": "Bearer " + "你的key",
+                            "Content-Type": "application/json"
+                        },
+                        "data": JSON.stringify({
+                            "model": "gpt-3.5-turbo",
+                            "messages": messages
+                        }),
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        console.log(response);
+
+                        const message = response.choices[0].message;
+                        messages.push({
+                            "role": message.role,
+                            "content": message.content
+                        });
+
+                        const htmlText = window.markdownit().render(message.content);
+                        chatbox.append(`<div class="answer mdui-typo mdui-card mdui-p-a-2">A: ${htmlText}</div>`);
+                        sendButton.val("询问");
+                        sendButton.prop("disabled", false);
+
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        sendButton.val("Oops, something went wrong");
+                        chatbox.append(`<p class="errormessage">出错：哎呀, 出现问题了, 可能是官方接口挂了, 具体请查看浏览器日志</p>`);
+                    });
+
+                } catch (error) {
+                    sendButton.val("Oops, something went wrong");
+                    chatbox.append(`<p class="errormessage">出错：哎呀, JavaScript代码有问题, 请检查代码</p>`);
+                }
+            }
+        });
+    </script>
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+</body>
+
+</html>
