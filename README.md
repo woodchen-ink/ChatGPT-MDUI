@@ -37,4 +37,4 @@
 2. 请求：如果您使用了本源码，请在下面留言，可以的话加上[苍正国际快递](https://www.czl.net)友情链接，感谢。
 
 
-### 借鉴于[https://github.com/JiChao99/GPT3.5-H5-lite-page](https://github.com/JiChao99/GPT3.5-H5-lite-page) ，感谢 @JiChao99
+### 接口调用代码借鉴于[https://github.com/JiChao99/GPT3.5-H5-lite-page](https://github.com/JiChao99/GPT3.5-H5-lite-page) ，感谢 @JiChao99
