@@ -43,19 +43,21 @@ body {
 
 <body
     class="mdui-appbar-with-toolbar mdui-bottom-nav-fixed mdui-theme-primary-indigo mdui-theme-accent-indigo mdui-color-grey-50" style="padding-bottom:280px;">
+    <!-- 头部展示 -->
     <div class="mdui-appbar mdui-appbar-fixed mdui-valign" style="background-color: #1e3b7a;">
         <h1 class="mdui-center" style="color:#FFF;">CZL Chatgpt</h1>
     </div>
+    <!-- 对话展示 -->
     <div class="mdui-container">
         <div id="chatbox" class=" mdui-p-a-1 mdui-m-t-3 mdui-row"></div>
     </div>
-    
-    <div class="mdui-bottom-nav  mdui-container-fluid " style="height:auto;flex-direction: column;background-color: rgb(204, 204, 204);">
+    <!-- 底部固定 -->
+    <div class="mdui-bottom-nav  mdui-container-fluid " style="height:auto;flex-direction: column;background-color: rgb(56, 56, 56);">
         <div class="mdui-container ">
-        <textarea id="userInput" class="mdui-textfield-input mdui-m-y-3 mdui-p-a-2 mdui-shadow-1 mdui-row mdui-color-grey-50" type="text"
-            rows="6" placeholder="在这里输入问题...换行请按Ctrl+Enter" autofocus></textarea>
+        <textarea id="userInput" class="mdui-textfield-input mdui-m-y-1 mdui-p-a-1  mdui-row mdui-color-grey-50" style="border-radius: 4px;" type="text"
+            rows="5" placeholder="在这里输入问题...换行请按Ctrl+Enter" autofocus></textarea>
         <input id="sendButton" type="button" value="询问"
-            class="mdui-btn mdui-btn-raised mdui-btn-block mdui-color-indigo mdui-row mdui-m-b-2" style="height:50px;">
+            class="mdui-btn mdui-btn-raised mdui-btn-block mdui-color-indigo mdui-row mdui-m-b-1" style="height:50px;">
     </div>
 </div>
 
@@ -75,7 +77,7 @@ body {
                         "role": "user",
                         "content": message
                     });
-                    chatbox.append(`<div class="question mdui-p-a-2 mdui-typo">Q: ${message}</div>`);
+                    chatbox.append(`<div class="question mdui-p-a-1 mdui-typo">Q: ${message}</div>`);
                     userInput.val("");
                     sendButton.val("询问中...");
                     sendButton.prop("disabled", true);
@@ -96,6 +98,7 @@ body {
                         "\n" +
                         currentValue.slice(cursorPosition)
                     );
+                    // Set the cursor position after the new line character
                     userInput.prop("selectionStart", cursorPosition + 1);
                     userInput.prop("selectionEnd", cursorPosition + 1);
                 }
@@ -127,7 +130,7 @@ body {
                         });
 
                         const htmlText = window.markdownit().render(message.content);
-                        chatbox.append(`<div class="answer mdui-typo mdui-card mdui-p-a-2">A: ${htmlText}</div>`);
+                        chatbox.append(`<div class="answer mdui-typo mdui-card mdui-p-a-1">A: ${htmlText}</div>`);
                         sendButton.val("询问");
                         sendButton.prop("disabled", false);
 
