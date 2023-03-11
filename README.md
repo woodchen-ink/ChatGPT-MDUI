@@ -5,10 +5,11 @@
 
 基于openai的chatgpt3.5接口，使用mdui轻型框架开发的单页面应用
 
+### 提供接口代理服务，基于我们在**弗吉尼亚北部的15M带宽服务器**，一个月5块，给单独的API调用地址，有意者联系我：wood#czl.net（#换成@）
+
 ## 例子
 
-![image](https://user-images.githubusercontent.com/95951386/224310898-c59ee54f-359e-4bce-a154-b6b19f2bae70.png)
-![image](https://user-images.githubusercontent.com/95951386/224313738-89993088-194e-4c21-9117-0808750b7076.png)
+![image](https://user-images.githubusercontent.com/95951386/224469793-f3ea9547-ae55-448a-898b-3ba40759d754.png)
 
 ## 使用方法
 
