@@ -5,7 +5,6 @@
 
 基于openai的chatgpt3.5接口，使用mdui轻型框架开发的单页面应用
 
-### 接口代理，可参考https://woodchen.ink/1224.html，稳定免费
 
 ## 例子
 
