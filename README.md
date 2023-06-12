@@ -1,6 +1,9 @@
 # ChatGPT-3.5-MDUI
 基于openai接口，mdui框架的chatgpt3.5开发的单页面应用，超轻超快，可以来回问答，CZL Express（苍正国际快递）提供支持
 
+# 广告
+[CZL Chat](https://chat.czl.net)，稳定商业版AI服务。
+
 ## 简介
 
 基于openai的chatgpt3.5接口，使用mdui轻型框架开发的单页面应用
