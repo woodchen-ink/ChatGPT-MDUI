@@ -11,61 +11,103 @@
     <script src="https://unpkg.com/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
     <style>
         body {
-  font-family: system-ui, -apple-system, "Microsoft YaHei", Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif !important
-}
+            font-family: system-ui, -apple-system, "Microsoft YaHei", Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif !important
+        }
 
-body {
-  background-color: #ffffff;
-  margin: 0;
-}
+        body {
+            background-color: #ffffff;
+            margin: 0;
+        }
 
-.question {
-  color: #1e3b7a;
-  font-size: 1em;
-}
+        .question {
+            color: #1e3b7a;
+            font-size: 1em;
+        }
 
-.answer {
-  color: #000000;
-  font-size: 1em;
-  background-color: #F5F5F5;
-}
+        .answer {
+            color: #000000;
+            font-size: 1em;
+            background-color: #F5F5F5;
+        }
 
-.errormessage {
-  color: #B32142;
-}
+        .errormessage {
+            color: #B32142;
+        }
 
-#chatbox {
-  overflow-y: auto;
-  box-sizing: border-box;
-}
+        #chatbox {
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 
 <body
-    class="mdui-appbar-with-toolbar mdui-bottom-nav-fixed mdui-theme-primary-indigo mdui-theme-accent-indigo mdui-color-grey-50" style="padding-bottom:280px;">
+    class="mdui-appbar-with-toolbar mdui-bottom-nav-fixed mdui-theme-primary-indigo mdui-theme-accent-indigo mdui-color-grey-50"
+    style="padding-bottom:280px;">
     <!-- 头部展示 -->
     <div class="mdui-appbar mdui-appbar-fixed mdui-valign" style="background-color: #1e3b7a;">
         <h1 class="mdui-center" style="color:#FFF;">CZL Chatgpt</h1>
+    </div>
+    <!-- 填写地址和密钥 -->
+    <div class="mdui-container mdui-color-blue-grey-50 mdui-p-t-2">
+        <div class="mdui-row mdui-valign">
+            <div class="mdui-col-xs-5">
+                <div class="mdui-textfield">
+                    <i class="mdui-icon material-icons">link</i>
+                    <input class="mdui-textfield-input" placeholder="api.openai.com" type="text" id="proxyurl"
+                        required />
+                        <div class="mdui-textfield-helper">代理域名，无需"https://"</div>
+                </div>
+            </div>
+            <div class="mdui-col-xs-5">
+                <div class="mdui-textfield">
+                    <i class="mdui-icon material-icons">vpn_key</i>
+                    <input class="mdui-textfield-input" placeholder="sk-xxxxxxxxxxx" type="text" id="key" required />
+                    <div class="mdui-textfield-helper">填写你的key，<a href="https://oapi.czl.net">获取国内可用key</a></div>
+                </div>
+            </div>
+            <div><i class="mdui-icon material-icons">extension</i></div>
+            <div class="mdui-col-xs-2">
+                
+                <select class="mdui-select" mdui-select id="model">
+                    <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                    <option value="gpt-3.5-turbo-0613">gpt-3.5-turbo-0613</option>
+                    <option value="gpt-3.5-turbo-16k">gpt-3.5-turbo-16k</option>
+                    <option value="gpt-3.5-turbo-16k-0613">gpt-3.5-turbo-16k-0613</option>
+                    <option value="gpt-4">gpt-4</option>
+                    <option value="gpt-4-0613">gpt-4-0613</option>
+                    <option value="gpt-4-32k">gpt-4-32k</option>
+                    <option value="gpt-4-32k-0613">gpt-4-32k-0613</option>
+                </select>
+                
+            </div>
+        </div>
+    </div>
     </div>
     <!-- 对话展示 -->
     <div class="mdui-container">
         <div id="chatbox" class=" mdui-p-a-1 mdui-m-t-3 mdui-row"></div>
     </div>
     <!-- 底部固定 -->
-    <div class="mdui-bottom-nav  mdui-container-fluid " style="height:auto;flex-direction: column;background-color: rgb(56, 56, 56);">
+    <div class="mdui-bottom-nav  mdui-container-fluid "
+        style="height:auto;flex-direction: column;background-color: rgb(56, 56, 56);">
         <div class="mdui-container ">
-        <textarea id="userInput" class="mdui-textfield-input mdui-m-y-1 mdui-p-a-1  mdui-row mdui-color-grey-50" style="border-radius: 4px;" type="text"
-            rows="5" placeholder="在这里输入问题...换行请按Ctrl+Enter" autofocus></textarea>
-        <input id="sendButton" type="button" value="询问"
-            class="mdui-btn mdui-btn-raised mdui-btn-block mdui-color-indigo mdui-row mdui-m-b-1" style="height:50px;">
+            <textarea id="userInput" class="mdui-textfield-input mdui-m-y-1 mdui-p-a-1  mdui-row mdui-color-grey-50"
+                style="border-radius: 4px;" type="text" rows="5" placeholder="在这里输入问题...换行请按Shift+Enter"
+                autofocus></textarea>
+            <input id="sendButton" type="button" value="询问"
+                class="mdui-btn mdui-btn-raised mdui-btn-block mdui-color-indigo mdui-row mdui-m-b-1"
+                style="height:50px;">
+        </div>
     </div>
-</div>
 
     <script>
         const url = new URL(window.location.href);
         const chatbox = $("#chatbox");
         const userInput = $("#userInput");
         const sendButton = $("#sendButton");
+
+
 
         $(document).ready(function () {
             const messages = [];
@@ -86,10 +128,10 @@ body {
             });
 
             userInput.on("keydown", (event) => {
-                if (event.keyCode === 13 && !event.ctrlKey && !event.shiftKey) { // Enter key without Ctrl key
+                if (event.keyCode === 13 && !event.ctrlKey && !event.shiftKey) {
                     event.preventDefault();
                     sendButton.click();
-                } else if (event.keyCode === 13 && (event.ctrlKey || event.shiftKey)) { // Enter key with Ctrl key
+                } else if (event.keyCode === 13 && (event.ctrlKey || event.shiftKey)) {
                     event.preventDefault();
                     const cursorPosition = userInput.prop("selectionStart");
                     const currentValue = userInput.val();
@@ -98,24 +140,31 @@ body {
                         "\n" +
                         currentValue.slice(cursorPosition)
                     );
-                    // Set the cursor position after the new line character
                     userInput.prop("selectionStart", cursorPosition + 1);
                     userInput.prop("selectionEnd", cursorPosition + 1);
                 }
             });
 
             function fetchMessages() {
+                let proxyurl = document.getElementById("proxyurl").value;
+                let key = document.getElementById("key").value;
+                let modelElement = document.getElementById("model");
+                let model = modelElement.options[modelElement.selectedIndex].value;
+
+                console.log(proxyurl);
+                console.log(key, model);
+                mdui.updateTextFields("#proxyurl", "key");
                 try {
                     var settings = {
-                        "url": "https://api.openai.com/v1/chat/completions",
+                        "url": "https://" + proxyurl+"/v1/chat/completions",
                         "method": "POST",
                         "timeout": 0,
                         "headers": {
-                            "Authorization": "Bearer " + "你的key",
+                            "Authorization": "Bearer " + key,
                             "Content-Type": "application/json"
                         },
                         "data": JSON.stringify({
-                            "model": "gpt-3.5-turbo",
+                            "model": model,
                             "messages": messages
                         }),
                     };
