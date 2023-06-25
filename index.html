@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CZL Chatgpt</title>
+    <title>ChatGPT-MDUI</title>
     <meta name="viewport"
         content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
@@ -46,7 +46,7 @@
     style="padding-bottom:280px;">
     <!-- 头部展示 -->
     <div class="mdui-appbar mdui-appbar-fixed mdui-valign" style="background-color: #1e3b7a;">
-        <h1 class="mdui-center" style="color:#FFF;">CZL Chatgpt</h1>
+        <h1 class="mdui-center" style="color:#FFF;">ChatGPT-MDUI</h1>
     </div>
     <!-- 填写地址和密钥 -->
     <div class="mdui-container mdui-color-blue-grey-50 mdui-p-t-2">
@@ -150,9 +150,6 @@
                 let key = document.getElementById("key").value;
                 let modelElement = document.getElementById("model");
                 let model = modelElement.options[modelElement.selectedIndex].value;
-
-                console.log(proxyurl);
-                console.log(key, model);
                 mdui.updateTextFields("#proxyurl", "key");
                 try {
                     var settings = {
