@@ -54,21 +54,22 @@
             <div class="mdui-col-xs-5">
                 <div class="mdui-textfield">
                     <i class="mdui-icon material-icons">link</i>
-                    <input class="mdui-textfield-input" placeholder="api.openai.com" type="text" id="proxyurl"
-                        required value="oapi.czl.net"/>
-                        <div class="mdui-textfield-helper">代理域名，无需"https://"</div>
+                    <input class="mdui-textfield-input" placeholder="api.openai.com" type="text" id="proxyurl" required
+                        value="oapi.czl.net" />
+                    <div class="mdui-textfield-helper">代理域名，无需"https://"</div>
                 </div>
             </div>
             <div class="mdui-col-xs-5">
                 <div class="mdui-textfield">
                     <i class="mdui-icon material-icons">vpn_key</i>
                     <input class="mdui-textfield-input" placeholder="sk-xxxxxxxxxxx" type="text" id="key" required />
-                    <div class="mdui-textfield-helper">填写你的key，<a href="https://oapi.czl.net" target="_blank">获取国内可用key</a></div>
+                    <div class="mdui-textfield-helper">填写你的key，<a href="https://oapi.czl.net"
+                            target="_blank">获取国内可用key</a></div>
                 </div>
             </div>
             <div><i class="mdui-icon material-icons">extension</i></div>
             <div class="mdui-col-xs-2">
-                
+
                 <select class="mdui-select" mdui-select id="model">
                     <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
                     <option value="gpt-3.5-turbo-0301">gpt-3.5-turbo-0301</option>
@@ -91,9 +92,12 @@
                     <option value="qwen-v1">qwen-v1</option>
                     <option value="qwen-plus-v1">qwen-plus-v1</option>
                 </select>
-                
+
             </div>
         </div>
+        <div class="mdui-row mdui-center mdui-p-y-1 mdui-color-blue-100" style="text-align: center;">本项目由<a href="https://woodchen.ink" target="_blank">woodchen</a>开源于<a
+            href="https://github.com/woodchen-ink/ChatGPT3.5-MDUI-SinglePage" target="_blank">Github</a>, 欢迎给个star
+    </div>
     </div>
     </div>
     <!-- 对话展示 -->
@@ -104,13 +108,16 @@
     <div class="mdui-bottom-nav  mdui-container-fluid "
         style="height:auto;flex-direction: column;background-color: rgb(56, 56, 56);">
         <div class="mdui-container ">
+            
             <textarea id="userInput" class="mdui-textfield-input mdui-m-y-1 mdui-p-a-1  mdui-row mdui-color-grey-50"
                 style="border-radius: 4px;" type="text" rows="5" placeholder="在这里输入问题...换行请按Shift+Enter"
                 autofocus></textarea>
             <input id="sendButton" type="button" value="询问"
                 class="mdui-btn mdui-btn-raised mdui-btn-block mdui-color-indigo mdui-row mdui-m-b-1"
                 style="height:50px;">
+
         </div>
+        
     </div>
 
     <script>
@@ -165,7 +172,7 @@
                 mdui.updateTextFields("#proxyurl", "key");
                 try {
                     var settings = {
-                        "url": "https://" + proxyurl+"/v1/chat/completions",
+                        "url": "https://" + proxyurl + "/v1/chat/completions",
                         "method": "POST",
                         "timeout": 0,
                         "headers": {
@@ -194,7 +201,7 @@
 
                     }).fail(function (jqXHR, textStatus, errorThrown) {
                         sendButton.val("Oops, something went wrong");
-                        chatbox.append(`<p class="errormessage">出错：哎呀, 出现问题了, 可能是官方接口挂了, 具体请查看浏览器日志</p>`);
+                        chatbox.append(`<p class="errormessage">出错：哎呀, 出现问题了, 请查看浏览器日志</p>`);
                     });
 
                 } catch (error) {
