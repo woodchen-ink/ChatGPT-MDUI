@@ -1,9 +1,7 @@
 # ChatGPT-3.5-MDUI
-基于openai接口，mdui框架的chatgpt3.5开发的单页面应用，超轻超快，可以来回问答，[CZL](https://czl.net)提供支持
+基于openai接口，mdui框架的chatgpt3.5开发的单页面应用，超轻超快，可以来回问答
 
-# 广告
-- [CZLChat](https://chat.czl.net)，稳定商业版AI服务。
-- [CZLOapi](https://oapi.czl.net)，OPENAI代理服务，无需翻墙。
+Telegram交流群：https://t.me/ai_cn2023
 
 ## 简介
 
@@ -30,5 +28,6 @@
 2. 更美观
 3. 移动端更方便看
 
-
-### 接口调用代码借鉴于[https://github.com/JiChao99/GPT3.5-H5-lite-page](https://github.com/JiChao99/GPT3.5-H5-lite-page) ，感谢 @JiChao99
+# 广告
+- [CZLChat](https://chat.czl.net)，稳定商业版AI服务。
+- [CZLOapi](https://oapi.czl.net)，OPENAI代理服务，无需翻墙。
