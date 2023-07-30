@@ -7,14 +7,22 @@ Telegram交流群：https://t.me/ai_cn2023
 
 基于openai的chatgpt3.5接口，使用mdui轻型框架开发的单页面应用
 
+支持前端自定义修改key、地址、模型。
+
+![image](https://github.com/woodchen-ink/ChatGPT3.5-MDUI-SinglePage/assets/95951386/cfc73b23-0b86-4e82-87c9-05870a654123)
+![image](https://github.com/woodchen-ink/ChatGPT3.5-MDUI-SinglePage/assets/95951386/a5e9e17a-aabd-4474-8c12-0893b964fc02)
+![image](https://github.com/woodchen-ink/ChatGPT3.5-MDUI-SinglePage/assets/95951386/a7032693-15d8-4051-a19b-1f6f78b533ff)
+
+
+
 
 ## 例子
 
-![image](https://user-images.githubusercontent.com/95951386/224469793-f3ea9547-ae55-448a-898b-3ba40759d754.png)
+![1690730433114.png](https://cdn-img.czl.net/2023/07/30/64c67fc1dc8b5.png)
 
 ## 使用方法
 
-1. 直接访问左侧域名：https://chatgpt-mdui.pages.dev,在页面中填入自己的代理地址、key、选择模型，发送消息即可。
+1. 直接访问左侧域名：https://chatgpt-mdui.czl.net ,在页面中填入自己的代理地址、key、选择模型，发送消息即可。
 2. 如果无法访问，可自行下载index.html，本地打开即可。
 
 ## 优点
