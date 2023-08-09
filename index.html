@@ -95,9 +95,10 @@
 
             </div>
         </div>
-        <div class="mdui-row mdui-center mdui-p-y-1 mdui-color-blue-100" style="text-align: center;">本项目由<a href="https://woodchen.ink" target="_blank">woodchen</a>开源于<a
-            href="https://github.com/woodchen-ink/ChatGPT3.5-MDUI-SinglePage" target="_blank">Github</a>, 欢迎给个star
-    </div>
+        <div class="mdui-row mdui-center mdui-p-y-1 mdui-color-blue-100" style="text-align: center;">本项目由<a
+                href="https://woodchen.ink" target="_blank">woodchen</a>开源于<a
+                href="https://github.com/woodchen-ink/ChatGPT-MDUI" target="_blank">Github</a>, 欢迎给个star
+        </div>
     </div>
     </div>
     <!-- 对话展示 -->
@@ -108,7 +109,7 @@
     <div class="mdui-bottom-nav  mdui-container-fluid "
         style="height:auto;flex-direction: column;background-color: rgb(56, 56, 56);">
         <div class="mdui-container ">
-            
+
             <textarea id="userInput" class="mdui-textfield-input mdui-m-y-1 mdui-p-a-1  mdui-row mdui-color-grey-50"
                 style="border-radius: 4px;" type="text" rows="5" placeholder="在这里输入问题...换行请按Shift+Enter"
                 autofocus></textarea>
@@ -117,7 +118,7 @@
                 style="height:50px;">
 
         </div>
-        
+
     </div>
 
     <script>
@@ -200,8 +201,9 @@
                         sendButton.prop("disabled", false);
 
                     }).fail(function (jqXHR, textStatus, errorThrown) {
-                        sendButton.val("Oops, something went wrong");
-                        chatbox.append(`<p class="errormessage">出错：哎呀, 出现问题了, 请查看浏览器日志</p>`);
+                        var response = JSON.parse(jqXHR.responseText);
+                        sendButton.val("Error");
+                        chatbox.append(`<p class="errormessage">Error: ${response.error.message}</p>`);
                     });
 
                 } catch (error) {
