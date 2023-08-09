@@ -1,6 +1,10 @@
 # ChatGPT-MDUI
 基于openai接口，mdui框架的chatgpt开发的单页面应用，超轻超快，可以来回问答
 
+## 又做了另一个基于Tailwind的，更好看些
+
+https://github.com/woodchen-ink/ChatGPT-Tailwind
+
 Telegram交流群：https://t.me/ai_cn2023
 
 ## 简介
