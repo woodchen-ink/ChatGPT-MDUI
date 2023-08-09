@@ -1,5 +1,5 @@
-# ChatGPT-3.5-MDUI
-基于openai接口，mdui框架的chatgpt3.5开发的单页面应用，超轻超快，可以来回问答
+# ChatGPT-MDUI
+基于openai接口，mdui框架的chatgpt开发的单页面应用，超轻超快，可以来回问答
 
 Telegram交流群：https://t.me/ai_cn2023
 
